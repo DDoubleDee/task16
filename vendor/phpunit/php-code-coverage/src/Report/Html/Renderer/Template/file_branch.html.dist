@@ -3,6 +3,16 @@
  <head>
   <meta charset="UTF-8">
   <title>Code Coverage for {{full_path}}</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{{path_to_root}}_css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="{{path_to_root}}_css/octicons.css" rel="stylesheet" type="text/css">

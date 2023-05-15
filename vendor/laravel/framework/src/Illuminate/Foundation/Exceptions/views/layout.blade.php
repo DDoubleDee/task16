@@ -5,6 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>@yield('title')</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
 
         <!-- Styles -->
         <style>

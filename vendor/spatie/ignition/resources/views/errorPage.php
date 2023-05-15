@@ -18,6 +18,16 @@
     <meta name="robots" content="noindex, nofollow">
 
     <title><?= $viewModel->title() ?></title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
 
     <script>
         // Livewire modals remove CSS classes on the `html` element so we re-add

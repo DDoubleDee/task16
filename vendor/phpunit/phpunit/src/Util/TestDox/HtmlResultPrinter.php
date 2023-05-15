@@ -26,6 +26,16 @@ final class HtmlResultPrinter extends ResultPrinter
     <head>
         <meta charset="utf-8"/>
         <title>Test Documentation</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
         <style>
             body {
                 text-rendering: optimizeLegibility;

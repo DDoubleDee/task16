@@ -5,6 +5,16 @@
     <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noodp,notranslate,noimageindex" />
     <title>Welcome to Symfony!</title>
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
+    <style>
         <?php $hue = random_int(0, 360); ?>
         <?php $darkColor = static function (float $alpha = 1) use ($hue) { return "hsla($hue, 20%, 45%, $alpha)"; }; ?>
         <?php $lightColor = static function (float $alpha = 1) use ($hue) { return "hsla($hue, 20%, 95%, $alpha)"; }; ?>

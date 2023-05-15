@@ -36,6 +36,16 @@ XML;
 <html>
     <head>
         <title>Home Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
     </head>
     <body>
         <h1>Heading</h1>

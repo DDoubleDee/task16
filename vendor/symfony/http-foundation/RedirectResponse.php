@@ -78,6 +78,16 @@ class RedirectResponse extends Response
         <meta http-equiv="refresh" content="0;url=\'%1$s\'" />
 
         <title>Redirecting to %1$s</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
     </head>
     <body>
         Redirecting to <a href="%1$s">%1$s</a>.

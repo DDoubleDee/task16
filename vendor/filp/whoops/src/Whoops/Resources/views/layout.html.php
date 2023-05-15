@@ -10,6 +10,16 @@
     <meta name="robots" content="noindex,nofollow"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title><?php echo $tpl->escape($page_title) ?></title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
 
     <style><?php echo $stylesheet ?></style>
     <style><?php echo $prismCss ?></style>

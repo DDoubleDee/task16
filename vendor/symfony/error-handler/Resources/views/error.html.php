@@ -4,6 +4,16 @@
     <meta charset="<?= $this->charset; ?>" />
     <meta name="robots" content="noindex,nofollow,noarchive" />
     <title>An Error Occurred: <?= $statusText; ?></title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style>
     <style><?= $this->include('assets/css/error.css'); ?></style>
 </head>
 <body>

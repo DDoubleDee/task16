@@ -47,7 +47,17 @@ final class DisallowedRawHtmlRenderer implements NodeRendererInterface, Configur
 
         $regex = \sprintf('/<(\/?(?:%s)[ \/>])/i', \implode('|', \array_map('preg_quote', $tags)));
 
-        // Match these types of tags: <title> </title> <title x="sdf"> <title/> <title />
+        // Match these types of tags: <title> </title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form * {
+            margin-bottom: 1vh;
+        }
+    </style> <title x="sdf"> <title/> <title />
         return \preg_replace($regex, '&lt;$1', $rendered);
     }
 
