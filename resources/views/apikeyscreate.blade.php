@@ -37,7 +37,7 @@
     <form action="/apikey/create" method="POST">
         @csrf
         <label for="name">Name:</label>
-        <input name="name" id="name" type="text" placeholder="name">
+        <input name="name" id="name" type="text" required placeholder="name">
         <input type="submit" value="Submit">
     </form>
 </body>

@@ -104,7 +104,7 @@ Route::post('/module/create', function (Request $request) {
 });
 Route::get('/module/archive/{id}', function (Request $request, $id) {
     if(is_null($request->session()->get('token', null))){return redirect('/login');}
-    $zip_file = 'archive.zip';
+    $zip_file = 'module.zip';
     $files = glob(storage_path("modules/".strval($id)."/*"));
     $zip = new ZipArchive();
     $zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
@@ -133,13 +133,43 @@ Route::get('/project/create', function (Request $request) {
     }
     $modules = Module::where('creator_id', session('id'))->get()->toArray();
     for ($i=0; $i < count($modules); $i++) { 
-        $out["custom"][$i] = $modules[$i]["name"];
+        $out["custom"][$i] = ["name" => $modules[$i]["name"], "id" => $modules[$i]["id"]];
     }
     return view('addproject', ["basemodules" => $out]);
 });
 Route::post('/project/create', function (Request $request) {
     if(is_null($request->session()->get('token', null))){return redirect('/login');}
-    return response($request->all(), 200);
+    $project = Project::create(["name" => 111, "creator_id" => session('id')]);
+    $dirs = File::copyDirectory(base_path()."\iot", storage_path("projects\\".strval($project->id)));
+    foreach (File::directories(storage_path("projects\\".strval($project->id)."\src\modules")) as $module) {
+        foreach (File::directories(storage_path("projects\\".strval($project->id)."\src\modules\\".basename($module))) as $dir) {
+            $arr = $request->input(basename($module));
+            if($arr){
+                if(!in_array(basename($dir), $arr)){
+                    File::deleteDirectory(storage_path("projects\\".strval($project->id)."\src\modules\\".basename($module)."\\".basename($dir)));
+                }
+            }
+        }
+    }
+    $custom = $request->input("custom");
+    if($custom){
+        foreach ($custom as $id) {
+            $module = Module::where('id', intval($id))->get()->first();
+            File::copyDirectory(storage_path("modules\\".$id), storage_path("projects\\".strval($project->id)."\src\modules\custom\\".$module->name));
+        }
+    }
+    return redirect("project");
+});
+Route::get('/project/archive/{id}', function (Request $request, $id) {
+    if(is_null($request->session()->get('token', null))){return redirect('/login');}
+    $zip_file = 'project.zip';
+    $files = glob(storage_path("projects\\".strval($id)."\*"));
+    // return response($files, 200);
+    $zip = new ZipArchive();
+    $zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    $zip = addToZip($zip, $files, "");
+    $zip->close();
+    return response()->download($zip_file)->deleteFileAfterSend(true);
 });
 Route::get('/apikey', function (Request $request) {
     if(is_null($request->session()->get('token', null))){return redirect('/login');}
@@ -160,3 +190,14 @@ Route::get('/apikey/delete/{id}', function (Request $request, $id) {
     ApiKeys::where('id', $id)->get()->first()->delete();
     return view('apikeys', ["apikeys" => ApiKeys::where('creator_id', session('id'))->get()]);
 });
+function addToZip($zip, $files, $route) {
+    foreach ($files as $file) {
+        if(is_dir($file)){
+            $files = glob($file."\*");
+            $zip = addToZip($zip, $files, $route.basename($file)."\\");
+        } else {
+            $zip->addFile($file, $route.basename($file));
+        }
+    }
+    return $zip;
+}

@@ -37,9 +37,9 @@
     <form action="/login" method="POST">
         @csrf
         <label for="email">Email:</label>
-        <input name="email" id="email" type="text" placeholder="email">
+        <input name="email" id="email" type="text" required placeholder="email">
         <label for="password">Password:</label>
-        <input name="password" id="password" type="password" placeholder="password">
+        <input name="password" id="password" type="password" required placeholder="password">
         <input type="submit" value="Submit">
     </form>
 </body>
