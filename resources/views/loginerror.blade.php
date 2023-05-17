@@ -25,6 +25,7 @@
         </ul>
     </nav>
     <h1>Login</h1>
+    <a id="createnew" href="/register">Register New User</a>
     <p style="color: red">Incorrect data</p>
     <form action="/login" method="POST">
         @csrf

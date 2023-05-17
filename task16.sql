@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 15, 2023 at 05:48 PM
+-- Generation Time: May 17, 2023 at 03:50 AM
 -- Server version: 8.0.24
 -- PHP Version: 8.1.1
 
@@ -54,7 +54,7 @@ CREATE TABLE `modules` (
 
 CREATE TABLE `projects` (
   `id` int NOT NULL,
-  `name` int NOT NULL,
+  `name` varchar(100) NOT NULL,
   `creator_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

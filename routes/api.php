@@ -20,10 +20,10 @@ Route::get("/projects", function (Request $request) {
     $api = ApiKeys::where('akey', $request->bearerToken())->get()->first();
     if(is_null($api)){
         return response(['code' => 401, 'message' => 'Authorization error', 'error' => "AUTH_TOKEN_INCORRECT", 'errors' => []], 401)->header('Content-Type', 'application/json'); 
-    }
-    $projects = Project::where('creator_id', $api->creator_id)->get();
+    } // check key
+    $projects = Project::where('creator_id', $api->creator_id)->get(); // get all projects of creator
     $out = array();
-    for ($i=0; $i < count($projects); $i++) { 
+    for ($i=0; $i < count($projects); $i++) { // fill needed info
         $out[$i] = ["id" => $projects[$i]->id, "name" => $projects[$i]->name, "file" => URL::to('/')."/"."files/".$projects[$i]->name."-".strval($projects[$i]->id).".zip"];
     }
     return response($out, 200)->header('Content-Type', 'application/json');

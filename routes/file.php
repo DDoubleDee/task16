@@ -39,5 +39,5 @@ Route::get("/{file}", function (Request $request, $file) {
     $zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
     $zip = addToZip($zip, $files, "");
     $zip->close();
-    return response()->download($zip_file)->deleteFileAfterSend(true);
+    return response()->download($zip_file)->deleteFileAfterSend(true); // same as regular archive but more caution for key
 });
