@@ -5,16 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        form * {
-            margin-bottom: 1vh;
-        }
-    </style>
+    <link rel="stylesheet" href="{{URL::to('/')}}/css.css">
 </head>
 <body>
     <nav>
@@ -34,9 +25,9 @@
         </ul>
     </nav>
     <h1>Projects</h1>
-    <a href="/project/create">Create Project</a>
+    <a id="createnew" href="/project/create">Create New Project</a>
     <table>
-        <tr>
+        <tr id="head">
             <td>
                 Name
             </td>
@@ -51,7 +42,7 @@
                     {{$project->name}}
                 </td>
                 <td>
-                    <a href="/project/archive/{{$project->id}}">Archive</a>
+                    <a href="/project/archive/{{$project->id}}">Download Archive</a>
                 </td>
                 <td>
                     <a href="/project/delete/{{$project->id}}">Delete</a>

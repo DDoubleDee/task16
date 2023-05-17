@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Project;
 use App\Models\ApiKeys;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +16,15 @@ use App\Models\User;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::get("/projects", function (Request $request) {
     $api = ApiKeys::where('akey', $request->bearerToken())->get()->first();
     if(is_null($api)){
         return response(['code' => 401, 'message' => 'Authorization error', 'error' => "AUTH_TOKEN_INCORRECT", 'errors' => []], 401)->header('Content-Type', 'application/json'); 
     }
-    return response(["projects" => Project::where('creator_id', $api->creator_id)->get()], 200)->header('Content-Type', 'application/json');
+    $projects = Project::where('creator_id', $api->creator_id)->get();
+    $out = array();
+    for ($i=0; $i < count($projects); $i++) { 
+        $out[$i] = ["id" => $projects[$i]->id, "name" => $projects[$i]->name, "file" => URL::to('/')."/"."files/".$projects[$i]->name."-".strval($projects[$i]->id).".zip"];
+    }
+    return response($out, 200)->header('Content-Type', 'application/json');
 });

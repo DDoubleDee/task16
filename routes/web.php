@@ -139,8 +139,8 @@ Route::get('/project/create', function (Request $request) {
 });
 Route::post('/project/create', function (Request $request) {
     if(is_null($request->session()->get('token', null))){return redirect('/login');}
-    $project = Project::create(["name" => 111, "creator_id" => session('id')]);
-    $dirs = File::copyDirectory(base_path()."\iot", storage_path("projects\\".strval($project->id)));
+    $project = Project::create(["name" => $request->input("name"), "creator_id" => session('id')]);
+    File::copyDirectory(base_path()."\iot", storage_path("projects\\".strval($project->id)));
     foreach (File::directories(storage_path("projects\\".strval($project->id)."\src\modules")) as $module) {
         foreach (File::directories(storage_path("projects\\".strval($project->id)."\src\modules\\".basename($module))) as $dir) {
             $arr = $request->input(basename($module));
@@ -164,7 +164,6 @@ Route::get('/project/archive/{id}', function (Request $request, $id) {
     if(is_null($request->session()->get('token', null))){return redirect('/login');}
     $zip_file = 'project.zip';
     $files = glob(storage_path("projects\\".strval($id)."\*"));
-    // return response($files, 200);
     $zip = new ZipArchive();
     $zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
     $zip = addToZip($zip, $files, "");

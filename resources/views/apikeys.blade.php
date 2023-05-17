@@ -5,16 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Api Keys</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        form * {
-            margin-bottom: 1vh;
-        }
-    </style>
+    <link rel="stylesheet" href="{{URL::to('/')}}/css.css">
 </head>
 <body>
     <nav>
@@ -34,9 +25,9 @@
         </ul>
     </nav>
     <h1>Api Keys</h1>
-    <a href="/apikey/create">Create Api Key</a>
+    <a id="createnew" href="/apikey/create">Create New Api Key</a>
     <table>
-        <tr>
+        <tr id="head">
             <td>
                 Name
             </td>

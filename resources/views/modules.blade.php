@@ -5,16 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modules</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        form * {
-            margin-bottom: 1vh;
-        }
-    </style>
+    <link rel="stylesheet" href="{{URL::to('/')}}/css.css">
 </head>
 <body>
     <nav>
@@ -34,9 +25,9 @@
         </ul>
     </nav>
     <h1>Modules</h1>
-    <a href="/module/create">Create Module</a>
+    <a id="createnew" href="/module/create">Create New Module</a>
     <table>
-        <tr>
+        <tr id="head">
             <td>
                 Name
             </td>
@@ -51,7 +42,7 @@
                     {{$module->name}}
                 </td>
                 <td>
-                    <a href="/module/archive/{{$module->id}}">Archive</a>
+                    <a href="/module/archive/{{$module->id}}">Download Archive</a>
                 </td>
                 <td>
                     <a href="/module/delete/{{$module->id}}">Delete</a>

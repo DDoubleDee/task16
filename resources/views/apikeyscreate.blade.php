@@ -5,16 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Api</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        form * {
-            margin-bottom: 1vh;
-        }
-    </style>
+    <link rel="stylesheet" href="{{URL::to('/')}}/css.css">
 </head>
 <body>
     <nav>
@@ -36,9 +27,11 @@
     <h1>Create Api Key</h1>
     <form action="/apikey/create" method="POST">
         @csrf
-        <label for="name">Name:</label>
-        <input name="name" id="name" type="text" required placeholder="name">
-        <input type="submit" value="Submit">
+        <div style="text-align: center">
+            <label for="name">Name:</label>
+            <input name="name" id="name" type="text" required placeholder="name">
+        </div>
+        <input id="submit" type="submit" value="Submit">
     </form>
 </body>
 </html>

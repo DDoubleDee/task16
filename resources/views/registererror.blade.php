@@ -5,16 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        form * {
-            margin-bottom: 1vh;
-        }
-    </style>
+    <link rel="stylesheet" href="{{URL::to('/')}}/css.css">
 </head>
 <body>
     <nav>
@@ -37,11 +28,17 @@
     <p style="color: red">This email is taken</p>
     <form action="/register" method="POST">
         @csrf
-        <label for="email">Email:</label>
-        <input name="email" id="email" type="text" required placeholder="email">
-        <label for="password">Password:</label>
-        <input name="password" id="password" type="password" required placeholder="password">
-        <input type="submit" value="Submit">
+        <div id="row">
+            <div>
+                <label for="email">Email:</label>
+                <input name="email" id="email" type="text" required placeholder="email">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input name="password" id="password" type="password" required placeholder="password">
+            </div>
+        </div>
+        <input id="submit" type="submit" value="Submit">
     </form>
 </body>
 </html>
